@@ -1,0 +1,23 @@
+.searchBarPopup{
+    padding: 3%;
+    border: 1px solid rgb(0,0,0,0.2);
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    position: absolute;
+    z-index: 1;
+    background-color:gray;
+    width:50%;
+    box-shadow: 5px 10px;
+    margin-left: 19%;
+    
+}
+
+.imgSearchPopup{
+    border:1px solid black;
+    border-radius:20px;
+   
+}
+.buttonSearchPopup{
+    margin-top:2%;
+}

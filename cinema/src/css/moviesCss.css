@@ -1,0 +1,25 @@
+.container{
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.container h3{
+    font-weight: normal;
+    color:red;
+    text-decoration: underline;
+}
+.img{
+    border:5px solid black;
+    border-radius:20px;
+    opacity: 0.5;
+    transition:0.25s ease-in-out;
+    cursor: pointer;
+}
+img:hover{
+    opacity: 1;
+}
+
+.input-group {
+    margin:20px 0px;
+}
