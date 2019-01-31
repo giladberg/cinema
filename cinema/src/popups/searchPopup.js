@@ -2,25 +2,28 @@ import React, { Component } from 'react'
 import Dal from '../dal/dal'
 import "../css/popupsCss.css"
 import {connect} from 'react-redux';
-import {addMovie} from '../actions/user-actions'
+import {addNewMovie} from '../actions/movie-actions'
 import { bindActionCreators } from 'redux';
 class searchPopup extends Component {
     constructor(props){
         super(props)
-        this.state={movieDetail:{},firsTime:true}
+        this.state={movieDetail:{},firsTime:true,isExist:false}
 
     }
     componentDidMount()
     {
   
   
-      console.log('componentDidMountPopips - search');
+      
         Dal.getAllData(`http://www.omdbapi.com/?t=${this.props.name}&apikey=b777c36d`).
         then(res=>{
             this.setState({movieDetail:res.data});
-          
-            
-         
+            this.props.movies.forEach(movie => {
+              if(movie.Title===res.data.Title){
+                this.setState({isExist:true})
+              }
+            });
+           
         })
     }
     cancel = () =>
@@ -29,18 +32,43 @@ class searchPopup extends Component {
   this.props.callback()
 }
 addMovie=()=>{
-    this.props.onAddMovie(this.props.name)
+    this.props.OnAddNewMovie(this.state.movieDetail)
     this.props.callback()
+    
     
 }
     
   render() {
-      console.log("render")
+     
     var detailsOfMovie
       if(this.state.movieDetail.Response==="False"){
        
-        detailsOfMovie=<p>We are so sorry, we didn't found this movie</p>   
-        console.log(this.state.movieDetail.Response)
+        detailsOfMovie=<div className="container">
+        <div className="row noFoundMovie">
+        <div className="col-sm-12  col-md-12 ">
+        <p>We are so sorry, we didn't found this movie</p> 
+        <div className="col-sm-12  col-md-6 buttonSearchPopup">
+                <input type="button" value="OK" className="btn btn-danger" onClick={this.cancel}/>
+          </div>
+        </div>
+        </div>
+        </div>
+        
+        
+      }
+     else if(this.state.isExist === true){
+       
+        detailsOfMovie=<div className="container">
+        <div className="row noFoundMovie">
+        <div className="col-sm-12  col-md-12 ">
+        <p>This movie allready exist!!!</p> 
+        <div className="col-sm-12  col-md-6 buttonSearchPopup">
+                <input type="button" value="OK" className="btn btn-danger" onClick={this.cancel}/>
+          </div>
+        </div>
+        </div>
+        </div>
+     
         
       }
       else  {
@@ -78,10 +106,15 @@ addMovie=()=>{
     )
   }
 }
+const mapStateToProps = state => ({
+  movies:state.movies
+  })
+
 function mapDispatchToProps (dispatch){
     return bindActionCreators({
-      onAddMovie: addMovie
+    
+      OnAddNewMovie: addNewMovie
     },dispatch)
        
       }
-      export default connect(null,mapDispatchToProps)(searchPopup);
+      export default connect(mapStateToProps,mapDispatchToProps)(searchPopup);

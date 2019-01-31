@@ -17,8 +17,13 @@ class SearchBar extends Component {
   onInputChange = (e)=>{
     this.setState({movie :e.target.value})
   }
-  searchMovie = ()=>{
+  searchMovie = (event)=>{
+    if(this.state.movie !== '' && this.state.modal === false){
+    
+
+    event.preventDefault()
     this.setState({modal:true})
+    }
     
   }
   cancelFromChild = () =>
@@ -32,14 +37,14 @@ class SearchBar extends Component {
   
   render() {
     var popup;
-    if(this.state.modal==true){
+    if(this.state.modal===true){
       popup=<SearchPopup name={this.state.movie}  callback={data => this.cancelFromChild()}/>
     }
   
     return (
      
       <div className="container">
-       <form  onSubmit={this.onFormSubmit} className="input-group">
+       <form   className="input-group">
         <input placeholder="Give a name of your favorite movie" className="form-control" value={this.state.movie} onChange={this.onInputChange}/>
         <span className="input-group-btn">
         <input type="button" value="Search"  className="btn btn-secondary" onClick={this.searchMovie}/> 
@@ -47,8 +52,6 @@ class SearchBar extends Component {
         </form>
         {popup}
         
- 
-  
       </div>
     );
   }

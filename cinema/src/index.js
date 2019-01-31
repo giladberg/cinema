@@ -6,19 +6,21 @@ import * as serviceWorker from './serviceWorker';
 
 import { combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import moviesReducer from './reducers/listOfMovies-reducer'
 
-import titlesReducer from './reducers/titleOfMovie-reducer';
 
 
 const allReducers = combineReducers({
    
-    titles:titlesReducer
+    
+    movies:moviesReducer
     
 })
 
 const store = createStore(allReducers, {
     
-    titles:["lords of the ring","dog day afternoon","the body","wall","blue jasmine","star wars","game of thrones","harry potter","good will hunting","breaking bad","no","Rush","dr house"]
+    
+    movies:[]
 
 },
 window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
