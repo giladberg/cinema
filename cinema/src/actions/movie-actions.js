@@ -30,7 +30,7 @@ export function deleteMovie(nameOfMovieToDelete){
 
 export function editMovie(originalTitle,title,plot,year,runtime,genre,director){
    
-    
+   
     return {
 
         type: EDIT_MOVIE,

@@ -14,8 +14,8 @@ class movieListPopup extends Component {
 
     }
     componentDidMount(){
-        
-        this.props.onEditMovie(this.props.movie.Title,this.props.newTitle,this.props.movie.Plot,this.props.movie.Year,this.props.movie.Time,this.props.movie.Genre,this.props.movie.Director)
+       
+        this.props.onEditMovie(this.props.movie.Title,this.props.newTitle,this.props.movie.Plot,this.props.movie.Year,this.props.movie.Runtime,this.props.movie.Genre,this.props.movie.Director)
     }
     componentDidUpdate(){
        
@@ -32,8 +32,11 @@ class movieListPopup extends Component {
     cancelFromChild= () =>{
         this.setState({askToDelete:false})
         this.setState({edit:false})
+        if(this.state.askToDelete===true){
+            this.props.callback()
+        }
 
-        this.props.callback()
+       
     }
  
  
@@ -60,7 +63,7 @@ class movieListPopup extends Component {
             <p className="text"><span className="spanText">Genre:</span> {this.props.movie.Genre}<span className="spanText">, The Director:</span> {this.props.movie.Director}</p>   
         </div>
             <div className="col-12 col-sm-12  col-md-5">
-               <img className="imgSearchPopup " src={this.props.movie.Poster} height="100%" width="100%" />
+               <img className="imgSearchPopup " src={this.props.movie.Poster} height="100%" width="100%" alt="popupImage" />
             </div>
             <div className="col-12 col-sm-4  col-md-4 buttonSearchPopup">
                   <input type="button" value="Cancel" className="btn btn-danger" onClick={this.cancel}/>

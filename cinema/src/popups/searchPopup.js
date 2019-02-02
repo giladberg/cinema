@@ -15,8 +15,8 @@ class searchPopup extends Component {
   
   
       
-        Dal.getAllData(`http://www.omdbapi.com/?t=${this.props.name}&apikey=b777c36d`).
-        then(res=>{
+        Dal.getAllData(`http://www.omdbapi.com/?t=${this.props.name}&apikey=b777c36d`).then(res=>
+        {
             this.setState({movieDetail:res.data});
             this.props.movies.forEach(movie => {
               if(movie.Title===res.data.Title){
@@ -82,7 +82,7 @@ addMovie=()=>{
           <p className="text"><span className="spanText">Genre:</span> {this.state.movieDetail.Genre}<span className="spanText">, The Director:</span> {this.state.movieDetail.Director}</p>   
       </div>
           <div className="col-12 col-sm-12  col-md-4">
-             <img className="imgSearchPopup " src={this.state.movieDetail.Poster} height="100%" width="100%" />
+             <img className="imgSearchPopup " src={this.state.movieDetail.Poster} height="100%" width="100%" alt="impagePopup" />
           </div>
           <div className="col-12 col-sm-6  col-md-6 buttonSearchPopup ">
                 <input type="button" value="cancel" className="btn btn-danger btn-md" onClick={this.cancel}/>

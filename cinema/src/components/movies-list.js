@@ -23,8 +23,8 @@ class Movies extends Component {
 
     var arr=[];
      this.state.titles.forEach(title =>{
-      Dal.getAllData(`http://www.omdbapi.com/?t=${title}&apikey=b777c36d`).
-      then(res => this.setState(()=>
+      Dal.getAllData(`http://www.omdbapi.com/?t=${title}&apikey=b777c36d`).then(res => this.setState(()=>
+      
       {
        
         arr.push(res.data)
@@ -108,9 +108,9 @@ class Movies extends Component {
         
       }
      
-        return<div className="container col-sm-12 col-md-4 mt-4" key={index}>
+        return<div className="container col-sm-12 col-md-4 mt-4" key={index} data-aos="zoom-in">
       
-        <img className="img" src={poster} alt="movie poster " onClick={() => this.movieDetails(movie,index)}/>
+        <img className="img" src={poster} alt="movie poster " onClick={() => this.movieDetails(movie,index)} />
         
      </div>
      

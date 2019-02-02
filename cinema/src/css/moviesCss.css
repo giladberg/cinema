@@ -33,10 +33,11 @@ img:hover{
     background-size: cover;
 }
 .mainTitle{
-    font-family: URW Chancery L, cursive		;
+    font-family: Apple Chancery, cursive;
     text-align: center;
     color:gold;
     font-size: 32px;
+    font-weight: 600;
 }
 .search-bar{
     text-align: center;

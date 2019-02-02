@@ -14,9 +14,9 @@
 
         case EDIT_MOVIE:
         
-      var newState =[]
+       newState =[]
     state.forEach((movie)=>{
-        if(movie.Title==payload.originalTitle){
+        if(movie.Title===payload.originalTitle){
            
             movie.Title=payload.title
             movie.Plot=payload.plot

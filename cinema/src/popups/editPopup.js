@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import "../css/popupsCss.css"
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {deleteMovie} from '../actions/movie-actions'
 import {editMovie} from '../actions/movie-actions'
 
 class edit extends Component {
@@ -12,8 +11,9 @@ class edit extends Component {
 
     }
     componentDidUpdate(){
-        if(this.state.errorRuntime ===false && this.state.errorYear===false && this.state.emptyFiled ===false &&this.state.readyToEdit==true && this.state.isExist==false){
-            console.log("good")
+     
+        if(this.state.errorRuntime ===false && this.state.errorYear===false && this.state.emptyFiled ===false &&this.state.readyToEdit===true && this.state.isExist===false){
+            
            this.props.onEditMovie(this.props.movie.Title,this.state.title,this.state.plot,this.state.year,this.state.time,this.state.genre,this.state.director)
            this.setState({readyToEdit:false})
            this.props.callback()
@@ -52,8 +52,10 @@ class edit extends Component {
         this.setState({emptyFiled:false})
         this.setState({errorYear:false})
         this.setState({errorRuntime:false})
+        this.setState({isExist:false})
+        
     
-         this.removeNonEnglishLetters(this.state.title) // include the function upperCaseForEachWord
+         this.removeNonEnglishLetters(this.state.title)
         this.checkEmpty(this.state.title)
         this.checkExistTitle(this.state.title)
         this.checkEmpty(this.state.plot)
@@ -106,7 +108,7 @@ checkEmpty =(string)=>{
 checkYear =(year)=>{
     if(year >2019 || year<1910){
         this.setState({errorYear:true})
-        console.log(year)
+        
     }
    
 }
@@ -116,29 +118,38 @@ checkRunTime = (time)=>{
     }
 }
 checkExistTitle= (title)=>{
-  
+   
+
+  if(this.props.movie.Title ===title){
+      
+    this.setState({isExist:false})
+  }
+  else{
     this.props.movies.forEach(movie => {
         
         if(movie.Title===title){
-            console.log(movie.Title)
+            
           this.setState({isExist:true})
         }
       });
+
+  }
+    
 }
  
    
   render() {
   var error
-      if(this.state.errorRuntime==true){
+      if(this.state.errorRuntime===true){
          error= <p className="text-danger">Please fill the run time filed, value between 3-300</p>
       }
-      else if(this.state.errorYear==true){
+      else if(this.state.errorYear===true){
         error= <p className="text-danger">Please fill the year field, value between 1910-2019 </p>
       }
-      else if(this.state.emptyFiled==true){
+      else if(this.state.emptyFiled===true){
         error= <p className="text-danger">Please fill all the value</p>
       }
-      else if(this.state.isExist==true){
+      else if(this.state.isExist===true){
         error= <p className="text-danger">I am sorry this title allready exist</p>
       }
       
@@ -156,7 +167,7 @@ checkExistTitle= (title)=>{
             {error}
         </div>
             <div className="col-sm-4  col-md-4">
-               <img className="imgSearchPopup " src={this.props.movie.Poster} height="100%" width="100%" />
+               <img className="imgSearchPopup " src={this.props.movie.Poster} height="100%" width="100%" alt="popupImage"/>
             </div>
             
             <div className="col-sm-6  col-md-6 buttonSearchPopup">
@@ -180,8 +191,6 @@ const mapStateToProps = state => ({
 function mapDispatchToProps (dispatch){
     return bindActionCreators({
     
-     
-      OnDeleteMovie: deleteMovie,
       onEditMovie: editMovie 
     },dispatch)
        
