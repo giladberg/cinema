@@ -14,7 +14,7 @@ class Movies extends Component {
   constructor(props){
   
     super(props)
-      this.state = { titles:["dog day afternoon","the body","wall","blue jasmine","star wars","game of thrones","harry potter","good will hunting","breaking bad","Rush","dr house"] ,movies:[],openPopup:false,movie:''}
+      this.state = { titles:["dog day afternoon","the body","wall","blue jasmine","star wars","game of thrones","harry potter","good will hunting","breaking bad","Rush","dr house"] ,movies:[],openPopup:false,movie:'',currentIndex:0,newTitle:''}
   }
  
   componentDidMount()
@@ -33,63 +33,97 @@ class Movies extends Component {
       },()=>{
      
         if(arr.length === this.state.titles.length){
-          arr.forEach((movie)=>{this.props.OnAddNewMovie(movie)})
+          arr.forEach((movie)=>{
+            
+            
+            this.props.OnAddNewMovie(movie)})
           
-        }
-        }
-        
+        }}
       ))
      })
     
   }
-  movieDetails = (data) =>{
+  
+  movieDetails = (data,index) =>{
     this.setState({movie:data})
+    this.setState({currentIndex:index})
    this.setState({openPopup:true})
+   this.removeNonEnglishLetters(data.Title)
   }
   cancelFromChild =()=>{
   
     this.setState({openPopup:false})
   }
+  removeNonEnglishLetters = (string) =>{
+    var str=[]
+    string.split('').forEach(letter=>{
+        if(letter.match("^[a-zA-Z ]*$")!= null){
+            str+=letter
+          
+           this.upperCaseForEachWord(str)
+        }
+    })
+    
+    }
+    upperCaseForEachWord=(string)=>{
+      var newString=[]
+      var firstLetter=true
+  string.split('').forEach(letter=>{
+  if(firstLetter===true){
+      newString+=letter.toUpperCase()
+       this.setState({newTitle:newString})
+      firstLetter=false
+      
+      }
+      else if(letter=== ' '){
+          firstLetter=true
+          newString+=' '
+           this.setState({newTitle:newString})
+        
+      }
+      else{
+          newString+=letter.toLowerCase()
+           this.setState({newTitle:newString})
+         
+      }
+    
+  })
+  }
+
   
   render() {
    
     var popupDetail 
     if(this.state.openPopup===true){
       
-      popupDetail=<MovieDetail movie={this.state.movie} callback={data => this.cancelFromChild()}/>
+      popupDetail=<MovieDetail movie={this.state.movie} index={this.state.currentIndex} newTitle={this.state.newTitle} callback={data => this.cancelFromChild()}/>
      
     }
    
     var listOfMovies =this.props.movies.map((movie,index)=>{
   
-      var poster;
+      var poster =movie.Poster
       if(movie.Poster==="N/A"){
         poster="http://www.townoftazewell.org/wp-content/gallery/misc/no-image-found.jpg"
-        return <div className="container col-sm-12  col-md-4" key={index}>
-       
-        <img className="img" src={poster}height="90%" width="90%" alt="N/A" onClick={() => this.movieDetails(movie)}/>
-     
-       
-     </div>
-
+        
       }
-      else{
-        return<div className="container col-sm-12 col-md-4" key={index}>
+     
+        return<div className="container col-sm-12 col-md-4 mt-4" key={index}>
       
-        <img className="img" src={movie.Poster} height="85%" width="90%" alt="movie poster " onClick={() => this.movieDetails(movie)}/>
+        <img className="img" src={poster} alt="movie poster " onClick={() => this.movieDetails(movie,index)}/>
         
      </div>
      
-      }
+      
      })
 
 
     return (
       <div className="container">
-      <h3>Welcome to our libary movies</h3>
-
+   
+   {popupDetail}
   <div className="row">
-  {popupDetail}
+ 
   {listOfMovies}
   </div>
 

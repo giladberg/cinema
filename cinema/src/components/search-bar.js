@@ -45,9 +45,9 @@ class SearchBar extends Component {
      
       <div className="container">
        <form   className="input-group">
-        <input placeholder="Give a name of your favorite movie" className="form-control" value={this.state.movie} onChange={this.onInputChange}/>
-        <span className="input-group-btn">
-        <input type="button" value="Search"  className="btn btn-secondary" onClick={this.searchMovie}/> 
+        <input placeholder="Give a name of your favorite movie" className="form-control-md search-bar  col-sm-7 ml-9 border border-warning" value={this.state.movie} onChange={this.onInputChange}/>
+        <span className="input-group-btn  mr-4">
+        <input type="button" value="Search"  className="btn-md btn-warning mr-5 text-white " onClick={this.searchMovie}/>
         </span>
         </form>
         {popup}

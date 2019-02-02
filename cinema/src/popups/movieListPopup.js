@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {addNewMovie} from '../actions/movie-actions'
 import { bindActionCreators } from 'redux';
 import {deleteMovie} from '../actions/movie-actions'
+import {editMovie} from '../actions/movie-actions'
 import BeforDelete from './beforeDelete'
 import Edit from './editPopup'
 class movieListPopup extends Component {
@@ -11,6 +12,13 @@ class movieListPopup extends Component {
         super(props)
         this.state={askToDelete:false,edit:false}
 
+    }
+    componentDidMount(){
+        
+        this.props.onEditMovie(this.props.movie.Title,this.props.newTitle,this.props.movie.Plot,this.props.movie.Year,this.props.movie.Time,this.props.movie.Genre,this.props.movie.Director)
+    }
+    componentDidUpdate(){
+       
     }
     edit = ()=>{
         this.setState({edit:true})
@@ -43,24 +51,27 @@ class movieListPopup extends Component {
     }
     else{
        detailsOfMovie =<div className="container">
-        <div className="row movieBarPopup">
-        <div className="col-sm-12  col-md-8 ">
-            <p>name of the movie: {this.props.movie.Title}</p>
-            <p>What is the plot?: {this.props.movie.Plot}</p>
-            <p>Year: {this.props.movie.Year}, How long?: {this.props.movie.Runtime}</p>
-            <p>Genre: {this.props.movie.Genre}, The Director: {this.props.movie.Director}</p>   
+        <div className="row searchBarPopup">
+        <div className="col-sm-12  col-md-7 ">
+        <p className="text"><span className="spanText">Id: </span>{this.props.index}</p>
+            <p className="text"><span className="spanText">Name of the movie: </span>{this.props.movie.Title}</p>
+            <p className="text"><span className="spanText">What is the plot?:</span> {this.props.movie.Plot}</p>
+            <p className="text"><span className="spanText">Year:</span> {this.props.movie.Year}<span className="spanText">, How long?: </span>{this.props.movie.Runtime}</p>
+            <p className="text"><span className="spanText">Genre:</span> {this.props.movie.Genre}<span className="spanText">, The Director:</span> {this.props.movie.Director}</p>   
         </div>
-            <div className="col-sm-12  col-md-4">
+            <div className="col-12 col-sm-12  col-md-5">
                <img className="imgSearchPopup " src={this.props.movie.Poster} height="100%" width="100%" />
             </div>
-            <div className="col-sm-12  col-md-4 buttonSearchPopup">
-                  <input type="button" value="delete" className="btn btn-success" onClick={this.askToDelete}/>
-            </div>
-            <div className="col-sm-12  col-md-4 buttonSearchPopup">
+            <div className="col-12 col-sm-4  col-md-4 buttonSearchPopup">
                   <input type="button" value="Cancel" className="btn btn-danger" onClick={this.cancel}/>
             </div>
-            <div className="col-sm-12  col-md-4 buttonSearchPopup">
-                  <input type="button" value="Edit" className="btn btn-danger" onClick={this.edit}/>
+            
+            <div className="col-12 col-sm-4  col-md-4 buttonSearchPopup">
+                  <input type="button" value="delete" className="btn btn-warning  " onClick={this.askToDelete}/>
+            </div>
+            
+            <div className="col-12 col-sm-4  col-md-4 buttonSearchPopup">
+                  <input type="button" value="Edit" className="btn btn-success" onClick={this.edit}/>
             </div>
         
         
@@ -89,7 +100,8 @@ function mapDispatchToProps (dispatch){
     return bindActionCreators({
     
       OnAddNewMovie: addNewMovie,
-      OnDeleteMovie: deleteMovie
+      OnDeleteMovie: deleteMovie,
+      onEditMovie: editMovie 
     },dispatch)
        
       }

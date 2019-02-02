@@ -36,7 +36,7 @@ class beforeDelete extends Component {
                 <input type="button" value="Cancel" className="btn btn-danger" onClick={this.cancelDelete}/>
           </div>
           <div className="col-sm-12  col-md-6 buttonSearchPopup">
-                <input type="button" value="Delete" className="btn btn-danger" onClick={this.delete}/>
+                <input type="button" value="Delete" className="btn btn-warning" onClick={this.delete}/>
           </div>
         </div>
         </div>

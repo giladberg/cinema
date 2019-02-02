@@ -1,35 +1,50 @@
 .searchBarPopup{
     padding: 3%;
-    border: 1px solid rgb(0,0,0,0.2);
-    border-radius: 15px;
+    border: 1px solid gold;
     margin: 0 auto;
     margin-bottom: 2%;
+    z-index: 1;
+    width:50%;
+    box-shadow: 1px 2px;
+    margin-left: 19%;
+    width:50%;
+    color:gold;
+    background-color:black;
+    text-align: left;
     position: absolute;
-    z-index: 1;
-    background-color:gray;
-    width:50%;
-    box-shadow: 5px 10px;
-    margin-left: 19%;
-    
+    font-size: 30px;
+   
 }
-.movieBarPopup{
+.editBarPopup{
     padding: 3%;
-    border: 1px solid rgb(0,0,0,0.2);
-    border-radius: 15px;
+    border: 1px solid gold;
     margin: 0 auto;
     margin-bottom: 2%;
-    position: fixed;
     z-index: 1;
-    background-color:gray;
     width:50%;
-    box-shadow: 5px 10px;
+    box-shadow: 1px 2px;
     margin-left: 19%;
-    
+    width:50%;
+    color:gold;
+    background-color:black;
+    text-align: left;
+    position: absolute;
+    font-size: 30px;
+   
+}
+.spanText{
+    color:Bisque ;
+    font-size: 19px;
+}
+.text{
+    font-size: 14px;
 }
 
+
+
 .imgSearchPopup{
-    border:1px solid black;
-    border-radius:20px;
+    border:1px solid gold;
+    border-radius:10px;
    
 }
 .buttonSearchPopup{
@@ -37,6 +52,130 @@
 }
 .noFoundMovie{
     margin: 0 auto;
-    border: 1px solid rgb(0,0,0,0.2);
+    border: 1px solid gold;
+    background-color:#303030;
     padding: 3%;
+    width:40%;
+    color :red;
+    z-index: 1;
+    position: fixed;
+    margin-left:17%;
 }
+
+
+@media only screen and (min-width: 1001px) {
+    .spanText{
+        color:Bisque ;
+        font-size: 19px;
+    }
+    .text{
+        font-size: 14px;
+    }
+    .imgSearchPopup{
+        border:1px solid gold;
+        border-radius:20px;
+        width:99%;
+        height:90%;
+       
+    }
+  
+  }
+ 
+  @media only screen and (max-width: 767px) {
+    
+     .imgSearchPopup{
+        border:1px solid gold;
+        border-radius:10px;
+        width:90%;
+        height:77%;
+       
+    }
+  
+    .searchBarPopup{
+     
+       
+        box-shadow: 1px 2px;
+        margin-left: 19%;
+        
+        width:49%;
+        color:gold;
+        background-color:black;
+        text-align: left;
+        position: absolute;
+        font-size:9px;
+       
+    }
+    .editBarPopup{
+     
+       
+          box-shadow: 1px 2px;
+        margin-left: 19%;
+        ;
+        width:49%;
+        
+        color:gold;
+        background-color:black;
+        text-align: left;
+        position: absolute;
+        font-size:9px;
+       
+    }
+    .spanText{
+        color:Bisque ;
+        font-size: 16px;
+    }
+    .text{
+        font-size: 11px;
+    }
+   
+
+   }
+   @media (min-width: 767px) and (max-width: 1001px) {
+    .imgSearchPopup{
+        border:1px solid gold;
+        border-radius:20px;
+        width:110%;
+        height:90%;
+       
+    }
+    .spanText{
+        color:Bisque ;
+        font-size: 18px;
+    }
+    .text{
+        font-size: 13px;
+    }
+    .searchBarPopup{
+     
+       
+        box-shadow: 1px 2px;
+        margin-left: 19%;
+        
+        width:49%;
+        
+        color:gold;
+        background-color:black;
+        text-align: left;
+        position: absolute;
+        font-size:9px;
+       
+    }
+    .editBarPopup{
+     
+       
+        box-shadow: 1px 2px;
+        margin-left: 19%;
+        position: absolute;
+        width:49%;
+        
+        color:gold;
+        background-color:black;
+        text-align: left;
+        position: absolute;
+        font-size:9px;
+       
+    }
+
+}
+
+  
