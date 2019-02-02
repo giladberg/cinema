@@ -118,16 +118,17 @@ checkRunTime = (time)=>{
     }
 }
 checkExistTitle= (title)=>{
-   
+  
 
   if(this.props.movie.Title ===title){
       
     this.setState({isExist:false})
   }
   else{
+      var lowercase;
     this.props.movies.forEach(movie => {
-        
-        if(movie.Title===title){
+        lowercase=movie.Title.toLowerCase()
+        if(movie.Title===title || title===lowercase ){
             
           this.setState({isExist:true})
         }
